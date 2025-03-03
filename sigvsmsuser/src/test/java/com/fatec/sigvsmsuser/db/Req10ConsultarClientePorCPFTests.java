@@ -21,7 +21,6 @@ class Req10ConsultarClientePorCPFTests {
 	@BeforeEach
 	public void setUp() {
 	    // Initialize test data before each test method
-		//cliente = new ClienteRecordDTO("80983098000","Jose da Silva","01310-100", "jose@gmail.com");
 		cliente = new Cliente();
 		cliente.setCpf("80983098000");
 		cliente.setNome("Jose da Silva");
@@ -40,6 +39,11 @@ class Req10ConsultarClientePorCPFTests {
 	@Test
 	void ct02_quando_cliente_nao_cadastrado_retorna_null() {
 		Cliente cliente = clienteRepository.findByCpf("80983098001").orElse(null);
+		assertNull (cliente);
+	}
+	@Test
+	void ct03_quando_cliente_invalido_retorna_null() {
+		Cliente cliente = clienteRepository.findByCpf("").orElse(null);
 		assertNull (cliente);
 	}
 }
