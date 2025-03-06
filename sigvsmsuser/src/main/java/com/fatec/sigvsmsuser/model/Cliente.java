@@ -1,6 +1,5 @@
 package com.fatec.sigvsmsuser.model;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -51,9 +50,11 @@ public class Cliente {
 		}
 
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -63,11 +64,10 @@ public class Cliente {
 	}
 
 	public void setNome(String nome) {
-		if (nome == null || nome.isBlank())
+		if (nome == null || nome.isBlank()) // nome.isEmpty() ja esta verificado
 			throw new IllegalArgumentException("O nome não deve estar em branco");
 		else
 			this.nome = nome;
-		this.nome = nome;
 	}
 
 	public String getCep() {
@@ -93,9 +93,9 @@ public class Cliente {
 	public void setDataCadastro() {
 		LocalDate dataAtual = LocalDate.now();
 		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String dataFormatada = dataAtual.format(pattern);  
+		String dataFormatada = dataAtual.format(pattern);
 		this.dataCadastro = dataFormatada;
-		
+
 	}
 
 	public static boolean validarCPF(String cpf) {
