@@ -21,21 +21,6 @@ class Req09CadastrarClienteTests {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-	@BeforeEach
-	public void setUp() {
-		// Initialize test data before each test method
-		// cliente = new ClienteRecordDTO("80983098000","Jose da Silva","01310-100",
-		// "jose@gmail.com");
-		cliente = new Cliente();
-		cliente.setCpf("80983098000");
-		cliente.setNome("Jose da Silva");
-		cliente.setCep("01310-100");
-		cliente.setEndereco("Av. Paulista");
-		cliente.setEmail("jose@gmail.com");
-		cliente.setDataCadastro();
-		clienteRepository.save(cliente);
-	}
-
 	public String dataAtual() {
 		LocalDate dataAtual = LocalDate.now();
 		DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -45,13 +30,19 @@ class Req09CadastrarClienteTests {
 
 	@Test
 	void ct01_quando_dados_validos_cliente_cadastrado_com_sucesso() {
+		//Dado - que o cpf nao esta cadastrado
+		//Quando - campos obrigatorios validos (setup())
+		cliente = new Cliente();
+		cliente.setCpf("80983098000");
+		cliente.setNome("Jose da Silva");
+		cliente.setCep("01310-100");
+		cliente.setEndereco("Av. Paulista");
+		cliente.setEmail("jose@gmail.com");
+		cliente.setDataCadastro();
+		clienteRepository.save(cliente);
+		//Entao - retorna cliente cadastrado com sucesso clienteRepository=1
 		assertEquals(1, clienteRepository.count());
 		assertEquals(dataAtual(), cliente.getDataCadastro());
 	}
 
-	@AfterEach
-	public void tearDown() {
-		// Release test data after each test method
-		clienteRepository.delete(cliente);
-	}
 }
